@@ -5,25 +5,24 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "fields",
+
 })
-public class RecordEvt {
+public class RecordRest {
 
     @JsonProperty("fields")
-    private Fields fields;
+    private FieldsRestaurants fields;
+
     
-
     @JsonProperty("fields")
-    public Fields getFields() {
+    public FieldsRestaurants getFields() {
         return fields;
     }
 
     @JsonProperty("fields")
-    public void setFields(Fields fields) {
+    public void setFields(FieldsRestaurants fields) {
         this.fields = fields;
     }
-
 }

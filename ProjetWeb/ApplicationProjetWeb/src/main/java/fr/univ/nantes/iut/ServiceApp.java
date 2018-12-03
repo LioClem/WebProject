@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.univ.nantes.iut;
 
 import java.util.List;
@@ -29,16 +26,13 @@ public class ServiceApp {
         return service.getAllEvenement();
     }
 	
-	/*@RequestMapping("/Parkings")
+	@RequestMapping("/Restaurants")
 	
-	List<MesParkings> parkings(){
-		return service.getAllParkings();
-	}
+    List<Restaurant> restaurants() {
+        return service.getAllRestaurant();
+    }
 	
-	@RequestMapping("/ParkingProche")
 	
-	MesParkings parkingProche() {
-		return service.getParkingProche(spectacles().get(2), parkings());
-	}*/
+	
 
 }

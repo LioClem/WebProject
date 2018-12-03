@@ -21,25 +21,45 @@ public class FactoryImp implements Factory  {
 	
 	@Autowired
 	Repo<RecordEvt> repo;
-
-	Evenement unEvenenement;
-
+	//Repo<RecordRest> repo_rest;
 	
 	@Override
 	public List<Evenement> getAllEvenement() {
 		List<RecordEvt> res = repo.getLesEvenements();
 
-		return build(res);
+		return buildEvt(res);
+	}
+	
+	@Override
+	public List<Restaurant> getAllRestaurant() {
+		List<RecordRest> res = repo.getLesRestaurants();
+		return buildRest(res);
+	}
+	
+	private List<Restaurant> buildRest(List<RecordRest> lesRests) {
+		List<Restaurant> res = new ArrayList<>();
+		int id = 1;
+		for (RecordRest unRest : lesRests) {
+			Restaurant rst = new Restaurant();
+			rst.setId(id);
+			rst.setNom(unRest.getFields().getNomoffre());
+			rst.setAdresse(unRest.getFields().getAdresse2());
+			rst.setCoord(unRest.getFields().getLocalisation());
+			rst.setType(unRest.getFields().getCategorie());
+			res.add(rst);
+			id++;
+		}
+		return res;
+		
 	}
 	
 	
 	
-	private List<Evenement> build(List<RecordEvt> lesEvents) {
+	private List<Evenement> buildEvt(List<RecordEvt> lesEvents) {
 		List<Evenement> res = new ArrayList<>();
-		int id = 0;
+		int id = 1;
 		Date date = null;
-		List<Double> coord = null;
-		
+		Double coord[] = null;
 		for (RecordEvt unEvent : lesEvents) {
 			Evenement evt = new Evenement();
 			evt.setId(id);
@@ -61,22 +81,16 @@ public class FactoryImp implements Factory  {
 				e.printStackTrace();
 			}
 			evt.setDate(date);
-			String formatLocation = unEvent.getFields().getLocation();
-			formatLocation.replace(" ", "");
-			String string[] = formatLocation.split(",");
-			coord.add(Double.parseDouble(string[0]));
-			coord.add(Double.parseDouble(string[1]));
-			evt.setCoord(coord);
+			//String formatLocation = unEvent.getFields().getLocation();
+			//formatLocation.replace(" ", "");
+			/*String string[] = unEvent.getFields().getLocation().split(",");
+			coord[0] = Double.parseDouble(string[0]);
+			coord[0] = Double.parseDouble(string[0]);*/
+			//evt.setCoord(coord);
 			res.add(evt);
 			id++;
 		}
 		return res;
-	}
-
-	@Override
-	public List<Restaurant> getAllRestaurant() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

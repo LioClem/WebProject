@@ -5,4 +5,5 @@ import java.util.List;
 public interface Repo<T> {
 
 	List<RecordEvt> getLesEvenements();
+	List<RecordRest> getLesRestaurants();
 }
