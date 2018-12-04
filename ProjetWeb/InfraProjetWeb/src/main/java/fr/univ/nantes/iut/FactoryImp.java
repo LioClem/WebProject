@@ -21,7 +21,6 @@ public class FactoryImp implements Factory  {
 	
 	@Autowired
 	Repo<RecordEvt> repo;
-	//Repo<RecordRest> repo_rest;
 	
 	@Override
 	public List<Evenement> getAllEvenement() {
@@ -34,6 +33,33 @@ public class FactoryImp implements Factory  {
 	public List<Restaurant> getAllRestaurant() {
 		List<RecordRest> res = repo.getLesRestaurants();
 		return buildRest(res);
+	}
+	
+	@Override
+	public List<Restaurant> getDistance(Evenement unEvent) {
+		List<RecordRest> recup = repo.getLesRestaurants();
+		Double coord_1_evt = unEvent.getCoord().get(0);
+		Double coord_2_evt = unEvent.getCoord().get(1);
+		List<Double> distances = new ArrayList<Double>();
+		List<RecordRest> restaurantsProches = new ArrayList<RecordRest>();
+		List<Restaurant> res = new ArrayList<Restaurant>();
+		for (RecordRest unRest : recup) {
+			Double coord_1_rest = unRest.getFields().getLocalisation().get(0);
+			Double coord_2_rest = unRest.getFields().getLocalisation().get(1);
+			Double calcul = Math.sqrt(Math.pow(coord_1_evt - coord_1_rest, 2 ) + Math.pow(coord_2_evt - coord_2_rest, 2));
+			if (calcul <= 5000){
+				distances.add(calcul);
+				restaurantsProches.add(unRest);
+				System.out.println(calcul);
+			}
+			res = buildRest(restaurantsProches);
+			int i = 0;
+				for (Restaurant rest : res) {
+					rest.setDistance(distances.get(i));
+					i++;
+				}		
+		}
+		return res;
 	}
 	
 	private List<Restaurant> buildRest(List<RecordRest> lesRests) {
@@ -53,13 +79,11 @@ public class FactoryImp implements Factory  {
 		
 	}
 	
-	
-	
 	private List<Evenement> buildEvt(List<RecordEvt> lesEvents) {
 		List<Evenement> res = new ArrayList<>();
 		int id = 1;
 		Date date = null;
-		Double coord[] = null;
+		String[] string;
 		for (RecordEvt unEvent : lesEvents) {
 			Evenement evt = new Evenement();
 			evt.setId(id);
@@ -81,12 +105,13 @@ public class FactoryImp implements Factory  {
 				e.printStackTrace();
 			}
 			evt.setDate(date);
-			//String formatLocation = unEvent.getFields().getLocation();
-			//formatLocation.replace(" ", "");
-			/*String string[] = unEvent.getFields().getLocation().split(",");
-			coord[0] = Double.parseDouble(string[0]);
-			coord[0] = Double.parseDouble(string[0]);*/
-			//evt.setCoord(coord);
+			String formatLocation = unEvent.getFields().getLocation();
+			string = formatLocation.split(",");
+			string[1] = string[1].replace(" ", "");
+			List<Double> coord = new ArrayList<Double>();
+			coord.add(Double.parseDouble(string[0]));
+			coord.add(Double.parseDouble(string[1]));
+			evt.setCoord(coord);
 			res.add(evt);
 			id++;
 		}

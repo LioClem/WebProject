@@ -32,6 +32,12 @@ public class ServiceApp {
         return service.getAllRestaurant();
     }
 	
+	@RequestMapping("/RestProche")
+	
+	List<Restaurant> resProches() {
+		return service.getRestaurantsProche(evenements().get(0));
+	}
+	
 	
 	
 

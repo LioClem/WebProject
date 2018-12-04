@@ -23,6 +23,7 @@ public class Evenement {
 	private String heure_fin;
 	private String type;
 	private String lieu;
+	
 	/**
 	 * @return the id
 	 */

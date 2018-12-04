@@ -12,5 +12,6 @@ import java.util.List;
 public interface Factory {
 	List<Evenement> getAllEvenement();
 	List<Restaurant> getAllRestaurant();
+	List<Restaurant> getDistance(Evenement unEvt);
 
 }

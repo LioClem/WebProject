@@ -17,6 +17,8 @@ public class Service {
 	@Autowired
 	Factory factory;
 	
+	Evenement unEvt;
+	
 	public List<Evenement> getAllEvenement(){
 		return factory.getAllEvenement();
 		
@@ -24,6 +26,10 @@ public class Service {
 	
 	public List<Restaurant> getAllRestaurant(){
 		return factory.getAllRestaurant();
+	}
+	
+	public List<Restaurant> getRestaurantsProche(Evenement unEvt){
+		return factory.getDistance(unEvt);
 	}
 	
 

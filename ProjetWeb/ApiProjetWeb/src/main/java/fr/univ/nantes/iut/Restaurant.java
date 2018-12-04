@@ -16,11 +16,24 @@ public class Restaurant {
 	private List<Double> coord;
 	private String adresse;
 	private String type;
+	private Double distance;
 	/**
 	 * @return the id
 	 */
 	public int getId() {
 		return id;
+	}
+	/**
+	 * @return the distance
+	 */
+	public Double getDistance() {
+		return distance;
+	}
+	/**
+	 * @param distance the distance to set
+	 */
+	public void setDistance(Double distance) {
+		this.distance = distance;
 	}
 	/**
 	 * @param id the id to set
