@@ -11,6 +11,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import fr.univ.nantes.iut.Evenement;
+import fr.univ.nantes.iut.Restaurant;
+
 
 
 /**
@@ -21,6 +24,8 @@ public class FactoryImp implements Factory  {
 	
 	@Autowired
 	Repo<RecordEvt> repo;
+	
+	Evenement unEvt;
 	
 	@Override
 	public List<Evenement> getAllEvenement() {
@@ -81,12 +86,12 @@ public class FactoryImp implements Factory  {
 	
 	private List<Evenement> buildEvt(List<RecordEvt> lesEvents) {
 		List<Evenement> res = new ArrayList<>();
-		int id = 1;
+		//int id = 1;
 		Date date = null;
 		String[] string;
 		for (RecordEvt unEvent : lesEvents) {
 			Evenement evt = new Evenement();
-			evt.setId(id);
+			//evt.setId(id);
 			evt.setNom(unEvent.getFields().getNom());
 			evt.setAdresse(unEvent.getFields().getAdresse());
 			evt.setDescription(unEvent.getFields().getDescription());
@@ -113,8 +118,9 @@ public class FactoryImp implements Factory  {
 			coord.add(Double.parseDouble(string[1]));
 			evt.setCoord(coord);
 			res.add(evt);
-			id++;
+			//id++;
 		}
+		//unEvt.setLesEvts(res);
 		return res;
 	}
 

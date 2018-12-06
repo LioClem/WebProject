@@ -9,12 +9,14 @@ package fr.univ.nantes.iut;
  */
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
 
 @Configuration
 public class Config {
  
     @Bean
-    public Service getSertvice() {
+    public Service getService() {
         return new Service();
     }
    
@@ -27,6 +29,6 @@ public class Config {
     public Repo getRepo() {
     	return new RepoImp();
     }
- 
+       
  
 }

@@ -5,6 +5,9 @@ package fr.univ.nantes.iut;
 
 import java.util.List;
 
+import fr.univ.nantes.iut.Evenement;
+import fr.univ.nantes.iut.Restaurant;
+
 /**
  * @author e187417p
  *

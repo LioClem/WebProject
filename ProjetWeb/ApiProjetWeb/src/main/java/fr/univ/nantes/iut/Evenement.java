@@ -3,16 +3,23 @@
  */
 package fr.univ.nantes.iut;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author e187417p
  *
  */
+@Document
 public class Evenement {
 	
-	private int id;
+	@Id
+	private String id;
+	
 	private String nom;
 	private String description;
 	private String adresse;
@@ -24,16 +31,61 @@ public class Evenement {
 	private String type;
 	private String lieu;
 	
+	
+	public Evenement() {
+		
+	}
+	
+
+	/**
+	 * @param nom
+	 * @param description
+	 * @param adresse
+	 * @param coord
+	 * @param ville
+	 * @param date
+	 * @param heure_debut
+	 * @param heure_fin
+	 * @param type
+	 * @param lieu
+	 */
+	public Evenement(String nom, String description, String adresse, List<Double> coord, String ville, Date date,
+			String heure_debut, String heure_fin, String type, String lieu) {
+		super();
+		this.nom = nom;
+		this.description = description;
+		this.adresse = adresse;
+		this.coord = coord;
+		this.ville = ville;
+		this.date = date;
+		this.heure_debut = heure_debut;
+		this.heure_fin = heure_fin;
+		this.type = type;
+		this.lieu = lieu;
+	}
+	
+	
+	/**
+	 * @param nom
+	 * @param description
+	 */
+	public Evenement(String nom, String description) {
+		super();
+		this.nom = nom;
+		this.description = description;
+	}
+
+
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	/**
@@ -156,6 +208,20 @@ public class Evenement {
 	public void setLieu(String lieu) {
 		this.lieu = lieu;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Evenement [nom=" + nom + ", description=" + description + ", adresse=" + adresse + ", coord=" + coord
+				+ ", ville=" + ville + ", date=" + date + ", heure_debut=" + heure_debut + ", heure_fin=" + heure_fin
+				+ ", type=" + type + ", lieu=" + lieu + "]";
+	}
+
+
+	
+	
+	
 	
 	
 	
