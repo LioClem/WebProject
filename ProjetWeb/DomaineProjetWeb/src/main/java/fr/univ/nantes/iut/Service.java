@@ -3,14 +3,11 @@
  */
 package fr.univ.nantes.iut;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.client.FindIterable;
@@ -29,6 +26,7 @@ public class Service {
 	@Autowired
 	Factory factory;
 
+	
 	public List<Evenement> getAllEvenement() {
 		return factory.getAllEvenement();
 
@@ -117,52 +115,5 @@ public class Service {
 		}
 	}
 
-	@Autowired
-	EvenementRepository evenementRepository;
-
-	// Create
-	/*
-	 * public Evenement create(String nom, String description, String adresse,
-	 * List<Double> coord, String ville, Date date, String heureDebut, String
-	 * heureFin, String type, String lieu) { return evtRepo.save(new Evenement(nom,
-	 * description, adresse, coord,ville,date, heureDebut, heureFin,type, lieu));
-	 * 
-	 * }
-	 */
-	public Evenement create(String nom, String description) {
-		return evenementRepository.save(new Evenement(nom, description));
-
-	}
-
-	public List<Evenement> getAll() {
-		return evenementRepository.findAll();
-	}
-
-	public Evenement getByNom(String nom) {
-		return evenementRepository.findByNom(nom);
-
-	}
-
-	public Evenement update(String nom, String description, String adresse, List<Double> coord, String ville, Date date,
-			String heureDebut, String heureFin, String type, String lieu) {
-		Evenement e = evenementRepository.findByNom(nom);
-		e.setDescription(description);
-		e.setCoord(coord);
-		e.setAdresse(adresse);
-		e.setHeure_debut(heureDebut);
-		e.setHeure_fin(heureFin);
-		e.setLieu(lieu);
-		e.setVille(ville);
-		return evenementRepository.save(e);
-	}
-
-	public void deleteAll() {
-		evenementRepository.deleteAll();
-	}
-
-	public void delete(String nom) {
-		Evenement e = evenementRepository.findByNom(nom);
-		evenementRepository.delete(e);
-	}
 
 }

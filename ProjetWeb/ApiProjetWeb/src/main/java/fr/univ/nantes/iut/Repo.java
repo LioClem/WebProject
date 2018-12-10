@@ -2,7 +2,7 @@ package fr.univ.nantes.iut;
 
 import java.util.List;
 
-public interface Repo<T> {
+public interface Repo<T>  {
 
 	List<RecordEvt> getLesEvenements();
 	List<RecordRest> getLesRestaurants();

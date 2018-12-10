@@ -8,8 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import fr.univ.nantes.iut.Evenement;
 import fr.univ.nantes.iut.Restaurant;
@@ -110,18 +115,19 @@ public class FactoryImp implements Factory  {
 				e.printStackTrace();
 			}
 			evt.setDate(date);
-			String formatLocation = unEvent.getFields().getLocation();
+			/*String formatLocation = unEvent.getFields().getLocation();
 			string = formatLocation.split(",");
 			string[1] = string[1].replace(" ", "");
 			List<Double> coord = new ArrayList<Double>();
 			coord.add(Double.parseDouble(string[0]));
 			coord.add(Double.parseDouble(string[1]));
-			evt.setCoord(coord);
+			evt.setCoord(coord);*/
 			res.add(evt);
 			//id++;
 		}
 		//unEvt.setLesEvts(res);
 		return res;
 	}
-
+	
+	
 }
