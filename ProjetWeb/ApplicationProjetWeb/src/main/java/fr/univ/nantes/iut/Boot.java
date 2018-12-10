@@ -16,6 +16,7 @@ public class Boot {
 	public static void main(String[] args) {
 		//SpringApplication.run(EvenementController.class, args);
 		SpringApplication.run(ServiceApp.class, args);	
+		//SpringApplication.run(SoireeController.class, args);	
 	}
 	
 }
