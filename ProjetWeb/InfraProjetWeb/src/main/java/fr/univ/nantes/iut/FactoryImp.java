@@ -91,12 +91,12 @@ public class FactoryImp implements Factory  {
 	
 	private List<Evenement> buildEvt(List<RecordEvt> lesEvents) {
 		List<Evenement> res = new ArrayList<>();
-		//int id = 1;
+		int id = 1;
 		Date date = null;
 		String[] string;
 		for (RecordEvt unEvent : lesEvents) {
 			Evenement evt = new Evenement();
-			//evt.setId(id);
+			evt.setId(id);
 			evt.setNom(unEvent.getFields().getNom());
 			evt.setAdresse(unEvent.getFields().getAdresse());
 			evt.setDescription(unEvent.getFields().getDescription());
@@ -115,15 +115,17 @@ public class FactoryImp implements Factory  {
 				e.printStackTrace();
 			}
 			evt.setDate(date);
-			/*String formatLocation = unEvent.getFields().getLocation();
-			string = formatLocation.split(",");
-			string[1] = string[1].replace(" ", "");
-			List<Double> coord = new ArrayList<Double>();
-			coord.add(Double.parseDouble(string[0]));
-			coord.add(Double.parseDouble(string[1]));
-			evt.setCoord(coord);*/
+			String formatLocation = unEvent.getFields().getLocation();
+			if (formatLocation != null) {
+				string = formatLocation.split(",");
+				string[1] = string[1].replace(" ", "");
+				List<Double> coord = new ArrayList<Double>();
+				coord.add(Double.parseDouble(string[0]));
+				coord.add(Double.parseDouble(string[1]));
+				evt.setCoord(coord);
+			} 
 			res.add(evt);
-			//id++;
+			id++;
 		}
 		//unEvt.setLesEvts(res);
 		return res;

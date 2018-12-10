@@ -40,6 +40,7 @@ public class ServiceApp {
 	@RequestMapping("/Restaurants")
 
 	List<Restaurant> restaurants() {
+		service.addResto();
 		return service.getAllRestaurant();
 	}
 
