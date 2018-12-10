@@ -1,96 +1,92 @@
 import React, { Component } from 'react'
 import "../style.css";
+import axios from "axios";
 
 class Evenement extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        evenements: [],
-      }
-      this.recup();
+
+    
+
+    state = {
+        soirees: []
+    };
+    /*
+        componentDidMount() {
+            fetch("http://localhost:8080/Restaurants")
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({
+                            isLoaded: true,
+                            evenements: result.evenements
+                        });
+                    },
+                    // Note: it's important to handle errors here
+                    // instead of a catch() block so that we don't swallow
+                    // exceptions from actual bugs in components.
+                    (error) => {
+                        this.setState({
+                            isLoaded: true,
+                            error
+                        });
+                    }
+                )
+        }*/
+    componentDidMount() {
+        axios
+            .get("http://localhost:8080/soirees/")
+            .then(response => {
+                const newSoirees = response.data.map(s => {
+                    return {
+                        id: s.id,
+                        nom: s.nom
+                    };
+                });
+
+                const newState = Object.assign({}, this.state, {
+                    soirees: newSoirees
+                });
+
+                this.setState(newState);
+            })
+            .catch(error => console.log(error));
     }
-  
-    recup = (e) => {
-      fetch("http://localhost:8080")
-        .then(res => res.json())
-        .then(
-          (result) => {
-            const evenements = result;
-            this.setState({evenements})
-          },
-          (error) => {
-            this.setState({
-              isLoaded: true,
-              error
-            });
-          }
-        )
-    }
-  
+
+
     render() {
-        const {evenements} = this.state
+        const { soirees } = this.state;
+        // if (isLoaded) {
+
+
         return (
+            <div>
+                    <ul>
+                        {
+                            soirees.map(s=>
+                                <li>
+                                    {s.nom}
+                                </li>
+                            )
+                            
 
-
-
-            <div class="panel panel-primary evt">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Evenement</h3>
-                </div>
-                <div>
-                    <ul> 
-                    {
-                        evenements.map( (evenement) => 
-                        <li>{evenement.nom}</li>
-                        
-                    )}
-                        
+                        }
                     </ul>
                 </div>
-                <div class="panel-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="rule-title">Nom de l'événement :</label>
-                            <input className="input" type="text" id="evenement" />
-                        </div>
-                        <div class="form-group">
-                            <label for="rule-desc">Type de l'événément : </label>
-                            <input className="input" type="text" id="type" />
-                        </div>
-                        <div class="form-group">
-                            <label for="rule-desc">Description de l'événément : </label>
-                            <textarea className="input" id="rule-desc" placeholder="Description" />
-                        </div>
-                        <div class="form-group">
-                            <label for="rule-desc">Date de l'événément : </label>
-                            <input className="input" type="text" id="rule-title" />
-                        </div>
-                        <div class="form-group">
-                            <label for="rule-desc">Heure de début : </label>
-                            <input className="input" type="text" id="rule-title" />
-                        </div>
-                        <div class="form-group">
-                            <label for="rule-desc">Lieu de l'événément : </label>
-                            <input className="input" type="text" id="rule-title" />
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-
-
 
         )
+
+        //   }
 
 
 
     }
 
 }
-/*
-var articlesElt = document.getElementById("evenements");
 
-function ajaxGet(url, callback) {
+
+
+
+
+/*function ajaxGet(url, callback) {
 
     var req = new XMLHttpRequest();
 
@@ -122,51 +118,75 @@ function ajaxGet(url, callback) {
 
 }
 
+function afficher(reponse) {
 
-ajaxGet("localhost:8080/Evenements", function (reponse) {
+    console.log(reponse);
 
-    // Transforme la réponse en un tableau d'articles
+}
 
-    //  var events = JSON.parse(reponse);
-
-    //  events.forEach(function (event) {
-
-    // Ajout du titre et du contenu de chaque article
-
-    var nomEvent = document.createElement("h2");
-
-    nomEvent.textContent = event.nom;
-
-    var descEvent = document.createElement("p");
-
-    /*        // Accès à la météo de Lyon avec la clé d'accès 50a65432f17cf542
-    ajaxGet("http://api.wunderground.com/api/50a65432f17cf542/conditions/q/France/Lyon.json", function (reponse) {
-        var meteo = JSON.parse(reponse);
-        // Récupération de certains résultats
-        var temperature = meteo.current_observation.temp_c;
-        var humidite = meteo.current_observation.relative_humidity;
-        var imageUrl = meteo.current_observation.icon_url;
-        // Affichage des résultats
-        var conditionsElt = document.createElement("div");
-        conditionsElt.textContent = "Il fait actuellement " + temperature +
-            "°C et l'humidité est de " + humidite;
-        var imageElt = document.createElement("img");
-        imageElt.src = imageUrl;
-        var meteoElt = document.getElementById("meteo");
-        meteoElt.appendChild(conditionsElt);
-        meteoElt.appendChild(imageElt);
-    });
-    descEvent.textContent = event.description;
-
-    articlesElt.appendChild(nomEvent);
-
-    articlesElt.appendChild(descEvent);
-
-    //});
-
-});*/
+ajaxGet("http://localhost:8080/soirees", afficher); */
 
 
+
+
+
+
+
+
+
+
+
+/*<div>
+                <div class="panel panel-primary evt">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Evenement</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="rule-title">Nom de l'événement :</label>
+                                <input className="input" type="text" id="evenement" />
+                            </div>
+                            <div class="form-group">
+                                <label for="rule-desc">Type de l'événément : </label>
+                                <input className="input" type="text" id="type" />
+                            </div>
+                            <div class="form-group">
+                                <label for="rule-desc">Description de l'événément : </label>
+                                <textarea className="input" id="rule-desc" placeholder="Description" />
+                            </div>
+                            <div class="form-group">
+                                <label for="rule-desc">Date de l'événément : </label>
+                                <input className="input" type="text" id="rule-title" />
+                            </div>
+                            <div class="form-group">
+                                <label for="rule-desc">Heure de début : </label>
+                                <input className="input" type="text" id="rule-title" />
+                            </div>
+                            <div class="form-group">
+                                <label for="rule-desc">Lieu de l'événément : </label>
+                                <input className="input" type="text" id="rule-title" />
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div>
+                    <ul>
+                        {
+                            soirees.map(s=>
+                                <li>
+                                    {s.nom}
+                                </li>
+                            )
+                            
+
+                        }
+                    </ul>
+                </div>
+
+            </div>*/
 
 
 

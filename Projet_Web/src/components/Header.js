@@ -1,8 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Route } from 'react-router-dom'
-import Recherche from './Recherche/Recherche';
-import RuleList from './RuleList/RuleList';
 import "../style.css";
 
 
@@ -24,6 +21,7 @@ const Header = () => (
         <li className="active"><Link to="/">Créer une soirée</Link></li>
         <li><Link to="/new">Consulte tes soirées</Link></li>
         <li><Link to="/evenement">Modifie tes soirées</Link></li>
+        <li><Link to="/restaurant">Les restos</Link></li>
         <li><Link to="/new">Supprime tes soirées</Link></li>
       </ul>
     </div>

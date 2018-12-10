@@ -1,4 +1,10 @@
-export const get = url => fetch(url)
+export const get = url => fetch(url,{
+  method: 'GET',
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
+}
+)
 
 export const post = (url, data) =>
   fetch(url, {
@@ -6,6 +12,7 @@ export const post = (url, data) =>
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin': '*',
     },
   })
 
@@ -15,6 +22,7 @@ export const put = (url, data) =>
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin': '*',
     },
   })
 
