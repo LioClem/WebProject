@@ -40,54 +40,22 @@ public class Service {
 		return factory.getDistance(unEvt);
 	}
 
-	/*public Soiree createSoiree() {
-		// Soiree uneSoiree = new Soiree(2, "test", "18h15", "2018-12-25", "20h15",
-		// getAllEvenement().get(0), getAllRestaurant().get(0), null);
-		Soiree uneSoiree = new Soiree("nom", "18h15", null, "20h15", null,
-				null, null);
+	public void dropSoiree() {
 		MongoClient mongo = new MongoClient("localhost", 27017);
+		System.out.println("Connected to the database successfully");
 		MongoDatabase database = mongo.getDatabase("Projet_Web");
-		// System.out.println("Credentials ::" + credential);
-
 		MongoCollection<Document> soiree = database.getCollection("Soiree");
 		soiree.drop();
-		System.out.println("Collection soiree selected successfully");
-
-		Document document = new Document().append("nom", uneSoiree.getNom())
-				.append("heure_debut", uneSoiree.getHeure_debut()).append("heure_fin", uneSoiree.getHeure_fin())
-				.append("date", uneSoiree.getDate()).append("evenement", uneSoiree.getUnEvt())
-				.append("restaurant", uneSoiree.getUnResto()).append("distance", uneSoiree.getDistance());
-
-		soiree.insertOne(document);
-		FindIterable<Document> iterDoc = soiree.find();
-		int i = 1;
-
-		// Getting the iterator
-		Iterator it = iterDoc.iterator();
-
-		while (it.hasNext()) {
-			System.out.println(it.next());
-			i++;
-		}
-		
-		return uneSoiree;
-
-	}*/
+	}
 
 	public void addEvt() {
 
 		MongoClient mongo = new MongoClient("localhost", 27017);
 
-		/*
-		 * MongoCredential credential; credential =
-		 * MongoCredential.createCredential("etu", "Projet_Web",
-		 * "azerty".toCharArray());
-		 */
 		System.out.println("Connected to the database successfully");
 
 		// Accessing the database
 		MongoDatabase database = mongo.getDatabase("Projet_Web");
-		// System.out.println("Credentials ::" + credential);
 
 		MongoCollection<Document> evenement = database.getCollection("Evenement");
 		evenement.drop();
@@ -116,13 +84,6 @@ public class Service {
 
 	public void addResto() {
 		MongoClient mongo = new MongoClient("localhost", 27017);
-
-		/*
-		 * MongoCredential credential; credential =
-		 * MongoCredential.createCredential("etu", "Projet_Web",
-		 * "azerty".toCharArray());
-		 * System.out.println("Connected to the database successfully");
-		 */
 
 		// Accessing the database
 		MongoDatabase database = mongo.getDatabase("Projet_Web");

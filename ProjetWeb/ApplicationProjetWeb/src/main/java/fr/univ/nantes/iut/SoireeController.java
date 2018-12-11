@@ -55,6 +55,4 @@ public class SoireeController {
 		return "All deteled";
 	}
 	
-	
-
 }

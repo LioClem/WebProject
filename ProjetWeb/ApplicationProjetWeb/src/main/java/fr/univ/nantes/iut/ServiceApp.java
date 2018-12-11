@@ -33,19 +33,13 @@ public class ServiceApp {
 	@Autowired
 	Service service;
 	
-	@RequestMapping("/test")
+	@RequestMapping("/insert")
 	void main() {
 		service.addEvt();
 		service.addResto();
 		
 	}
 	
-	/*@RequestMapping("/test2")
-	Soiree main2() {
-		return service.createSoiree();
-	}*/
-	
-
 	@RequestMapping("/Evenements")
 
 	List<Evenement> evenements() {
@@ -60,15 +54,14 @@ public class ServiceApp {
 		return service.getAllRestaurant();
 	}
 
-	/*@RequestMapping("/RestProche")
-
-	List<Restaurant> resProches() {
-		return service.getRestaurantsProche(evenements().get(0));
-	}*/
-	
 	@RequestMapping("/lesRestos")
 	public List<Restaurant> getLesRestos(@RequestParam int unEvt){
 		return service.getRestaurantsProche(unEvt);
+	}
+	
+	@RequestMapping("/drop")
+	public void drop() {
+		service.dropSoiree();
 	}
 	
 }

@@ -13,6 +13,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 
 public class SoireeService {
 
@@ -34,7 +36,7 @@ public class SoireeService {
 		System.out.println("Soiree drop succesfully");
 		Document document = new Document().append("nom", nom).append("heure_debut", heure_debut)
 				.append("heure_fin", heure_fin).append("date", dat).append("num_evenement", numero_evt)
-				.append("num_restaurant", numero_resto);
+				.append("num_restaurant", numero_resto).append("distance", distance);
 		soiree.insertOne(document);
 		System.out.println("Document inserted successfully");
 
@@ -62,6 +64,22 @@ public class SoireeService {
 
 	public Soiree update(String nom, String heure_debut, String date, String heure_fin, int numero_evt, int numero_resto) {
 		Soiree s = repo.findByNom(nom);
+		
+		
+		MongoClient mongo = new MongoClient("localhost", 27017);
+		System.out.println("Connected to the database successfully");
+		// Accessing the database
+		MongoDatabase database = mongo.getDatabase("Projet_Web");
+		MongoCollection<Document> soiree = database.getCollection("Soiree");
+		System.out.println("Collection soiree selected successfully");
+		soiree.updateOne(Filters.eq("nom", nom), Updates.set("heure_debut", heure_debut));    
+		soiree.updateOne(Filters.eq("nom", nom), Updates.set("heure_fin", heure_fin));    
+		soiree.updateOne(Filters.eq("nom", nom), Updates.set("date", convertDate(date)));    
+		soiree.updateOne(Filters.eq("nom", nom), Updates.set("num_evenement", numero_evt));    
+		soiree.updateOne(Filters.eq("nom", nom), Updates.set("num_restaurant", numero_resto));
+		soiree.updateOne(Filters.eq("nom", nom), Updates.set("distance", fac.calculDistance(numero_evt, numero_resto)));
+		System.out.println("Document update successfully...");  
+		
 		s.setHeure_debut(heure_debut);
 		s.setHeure_fin(heure_fin);
 		s.setDate(convertDate(date));
@@ -75,11 +93,26 @@ public class SoireeService {
 	}
 
 	public void deleteAll() {
+		MongoClient mongo = new MongoClient("localhost", 27017);
+		System.out.println("Connected to the database successfully");
+		// Accessing the database
+		MongoDatabase database = mongo.getDatabase("Projet_Web");
+		MongoCollection<Document> soiree = database.getCollection("Soiree");
+		System.out.println("Collection soiree selected successfully");
+		soiree.drop();
 		repo.deleteAll();
 	}
 
 	public void delete(String nom) {
 		Soiree s = repo.findByNom(nom);
+		MongoClient mongo = new MongoClient("localhost", 27017);
+		System.out.println("Connected to the database successfully");
+		// Accessing the database
+		MongoDatabase database = mongo.getDatabase("Projet_Web");
+		MongoCollection<Document> soiree = database.getCollection("Soiree");
+		System.out.println("Collection soiree selected successfully");
+		soiree.deleteOne(Filters.eq("nom", nom)); 
+	    System.out.println("Document deleted successfully...");
 		repo.delete(s);
 	}
 

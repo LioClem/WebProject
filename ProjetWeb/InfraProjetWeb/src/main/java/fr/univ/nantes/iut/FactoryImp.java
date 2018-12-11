@@ -8,18 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import fr.univ.nantes.iut.Evenement;
 import fr.univ.nantes.iut.Restaurant;
-
-
 
 /**
  * @author e187417p
@@ -35,7 +28,6 @@ public class FactoryImp implements Factory  {
 	@Override
 	public List<Evenement> getAllEvenement() {
 		List<RecordEvt> res = repo.getLesEvenements();
-
 		return buildEvt(res);
 	}
 	
@@ -165,7 +157,6 @@ public class FactoryImp implements Factory  {
 			res.add(evt);
 			id++;
 		}
-		//unEvt.setLesEvts(res);
 		return res;
 	}
 	
