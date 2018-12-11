@@ -29,6 +29,10 @@ public class Config {
     	return new RepoImp();
     }
     
+    @Bean SoireeService getSoireeService() {
+    	return new SoireeService();
+    }
+    
    
     
     

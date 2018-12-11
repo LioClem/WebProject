@@ -36,21 +36,21 @@ public class Service {
 		return factory.getAllRestaurant();
 	}
 
-	public List<Restaurant> getRestaurantsProche(Evenement unEvt) {
+	public List<Restaurant> getRestaurantsProche(int unEvt) {
 		return factory.getDistance(unEvt);
 	}
 
-	public Soiree createSoiree() {
+	/*public Soiree createSoiree() {
 		// Soiree uneSoiree = new Soiree(2, "test", "18h15", "2018-12-25", "20h15",
 		// getAllEvenement().get(0), getAllRestaurant().get(0), null);
-		Soiree uneSoiree = new Soiree(new ObjectId(), "nom", "18h15", null, "20h15", null,
+		Soiree uneSoiree = new Soiree("nom", "18h15", null, "20h15", null,
 				null, null);
 		MongoClient mongo = new MongoClient("localhost", 27017);
 		MongoDatabase database = mongo.getDatabase("Projet_Web");
 		// System.out.println("Credentials ::" + credential);
 
 		MongoCollection<Document> soiree = database.getCollection("Soiree");
-		//soiree.drop();
+		soiree.drop();
 		System.out.println("Collection soiree selected successfully");
 
 		Document document = new Document().append("nom", uneSoiree.getNom())
@@ -72,7 +72,7 @@ public class Service {
 		
 		return uneSoiree;
 
-	}
+	}*/
 
 	public void addEvt() {
 

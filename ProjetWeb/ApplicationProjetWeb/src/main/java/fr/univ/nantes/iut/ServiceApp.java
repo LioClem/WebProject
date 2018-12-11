@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.univ.nantes.iut.Evenement;
@@ -39,10 +40,10 @@ public class ServiceApp {
 		
 	}
 	
-	@RequestMapping("/test2")
+	/*@RequestMapping("/test2")
 	Soiree main2() {
 		return service.createSoiree();
-	}
+	}*/
 	
 
 	@RequestMapping("/Evenements")
@@ -59,43 +60,15 @@ public class ServiceApp {
 		return service.getAllRestaurant();
 	}
 
-	@RequestMapping("/RestProche")
+	/*@RequestMapping("/RestProche")
 
 	List<Restaurant> resProches() {
 		return service.getRestaurantsProche(evenements().get(0));
-	}
+	}*/
 	
-	/* @Autowired
-	  private SoireeRepository repository;
-	  
-	  
-	  @RequestMapping(value = "/", method = RequestMethod.GET)
-	  public List<Soiree> getAllSoiree() {
-	    return repository.findAll();
-	  }
-
-	  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	  public Soiree getSoireeById(@PathVariable("id") ObjectId id) {
-	    return repository.findBy_id(id);
-	  }
-	  	  
-	  @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	  public void modifySoireeById(@PathVariable("id") ObjectId id, @Valid 
-	  @RequestBody Soiree soiree) {
-	    soiree.set_id(id);
-	    repository.save(soiree);
-	  }
-	  
-	  @RequestMapping(value = "/", method = RequestMethod.POST)
-	  public Soiree createSoiree(@Valid @RequestBody Soiree soiree) {
-	    soiree.set_id(ObjectId.get());
-	    repository.save(soiree);
-	    return soiree;
-	  }
-	  
-	  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	  public void deleteSoiree(@PathVariable ObjectId id) {
-	    repository.delete(repository.findBy_id(id));
-	  }*/
+	@RequestMapping("/lesRestos")
+	public List<Restaurant> getLesRestos(@RequestParam int unEvt){
+		return service.getRestaurantsProche(unEvt);
+	}
 	
 }

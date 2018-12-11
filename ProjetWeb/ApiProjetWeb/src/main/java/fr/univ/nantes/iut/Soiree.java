@@ -4,18 +4,20 @@ import java.util.Date;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class Soiree {
 
 	@Id
-	public ObjectId _id;
+	public String id;
 
 	public String nom;
 	public String heure_debut;
 	public Date date;
 	public String heure_fin;
-	public Evenement unEvt;
-	public Restaurant unResto;
+	public int numEvt;
+	public int numResto;
 	public Double distance;
 
 	// Constructors
@@ -23,7 +25,6 @@ public class Soiree {
 	}
 
 	/**
-	 * @param _id
 	 * @param nom
 	 * @param heure_debut
 	 * @param date
@@ -32,26 +33,28 @@ public class Soiree {
 	 * @param unResto
 	 * @param distance
 	 */
-	public Soiree(ObjectId _id, String nom, String heure_debut, Date date, String heure_fin, Evenement unEvt,
-			Restaurant unResto, Double distance) {
-		super();
-		this._id = _id;
+	public Soiree(String nom, String heure_debut,String heure_fin, Date date , int numEvt,
+			int numResto, Double distance) {
 		this.nom = nom;
 		this.heure_debut = heure_debut;
 		this.date = date;
 		this.heure_fin = heure_fin;
-		this.unEvt = unEvt;
-		this.unResto = unResto;
+		this.numEvt = numEvt;
+		this.numResto = numResto;
 		this.distance = distance;
 	}
-
+	
+	public Soiree(String nom) {
+		this.nom = nom;
+	}
+	
 	// ObjectId needs to be converted to string
 	public String get_id() {
-		return _id.toHexString();
+		return id;
 	}
 
-	public void set_id(ObjectId _id) {
-		this._id = _id;
+	public void set_id(String id) {
+		this.id = id;
 	}
 
 	/**
@@ -113,29 +116,29 @@ public class Soiree {
 	/**
 	 * @return the unEvt
 	 */
-	public Evenement getUnEvt() {
-		return unEvt;
+	public int getUnEvt() {
+		return numEvt;
 	}
 
 	/**
 	 * @param unEvt the unEvt to set
 	 */
-	public void setUnEvt(Evenement unEvt) {
-		this.unEvt = unEvt;
+	public void setUnEvt(int unEvt) {
+		this.numEvt = unEvt;
 	}
 
 	/**
 	 * @return the unResto
 	 */
-	public Restaurant getUnResto() {
-		return unResto;
+	public int getUnResto() {
+		return numResto;
 	}
 
 	/**
 	 * @param unResto the unResto to set
 	 */
-	public void setUnResto(Restaurant unResto) {
-		this.unResto = unResto;
+	public void setUnResto(int unResto) {
+		this.numResto = unResto;
 	}
 
 	/**
@@ -151,6 +154,18 @@ public class Soiree {
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Soiree [id=" + id + ", nom=" + nom + ", heure_debut=" + heure_debut + ", date=" + date + ", heure_fin="
+				+ heure_fin + ", numEvt=" + numEvt + ", numResto=" + numResto + ", distance=" + distance + "]";
+	}
+
+
+	
 	
 	
 

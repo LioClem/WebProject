@@ -46,30 +46,67 @@ public class FactoryImp implements Factory  {
 	}
 	
 	@Override
-	public List<Restaurant> getDistance(Evenement unEvent) {
-		List<RecordRest> recup = repo.getLesRestaurants();
-		Double coord_1_evt = unEvent.getCoord().get(0);
-		Double coord_2_evt = unEvent.getCoord().get(1);
-		List<Double> distances = new ArrayList<Double>();
-		List<RecordRest> restaurantsProches = new ArrayList<RecordRest>();
-		List<Restaurant> res = new ArrayList<Restaurant>();
-		for (RecordRest unRest : recup) {
-			Double coord_1_rest = unRest.getFields().getLocalisation().get(0);
-			Double coord_2_rest = unRest.getFields().getLocalisation().get(1);
-			Double calcul = Math.sqrt(Math.pow(coord_1_evt - coord_1_rest, 2 ) + Math.pow(coord_2_evt - coord_2_rest, 2));
-			if (calcul <= 5000){
-				distances.add(calcul);
-				restaurantsProches.add(unRest);
-				System.out.println(calcul);
+	public List<Restaurant> getDistance(int unEvent) {
+		List<Restaurant> recup = getAllRestaurant();
+		Evenement evt = new Evenement();
+		for (Evenement e : getAllEvenement()) {
+			if (e.getId() == unEvent) {
+				evt = e;
 			}
-			res = buildRest(restaurantsProches);
-			int i = 0;
-				for (Restaurant rest : res) {
-					rest.setDistance(distances.get(i));
-					i++;
-				}		
 		}
-		return res;
+		Double coord_1_evt = convertRad(evt.getCoord().get(0));
+		Double coord_2_evt = convertRad(evt.getCoord().get(1));
+		List<Restaurant> restaurantsProches = new ArrayList<Restaurant>();
+		List<Restaurant> res = new ArrayList<Restaurant>();
+		for (Restaurant resto : recup) {
+			int R=6378137; //Rayon de la terre en mètre
+			Double coord_1_resto = convertRad(resto.getCoord().get(0));
+			Double coord_2_resto = convertRad(resto.getCoord().get(1));
+			Double dlong = (coord_2_resto - coord_2_evt) / 2;
+			Double dlat = (coord_1_resto - coord_1_evt) / 2;
+			
+			Double convert1 = (Math.sin(dlat) * Math.sin(dlat)) + Math.cos(coord_1_evt) * Math.cos(coord_1_resto) * (Math.sin(dlong) * Math.sin(dlong));
+			Double res2 = 2 * Math.atan2(Math.sqrt(convert1), Math.sqrt(1 - convert1));
+			Double calcul = R * res2;
+			if (calcul <= 1000){
+				restaurantsProches.add(resto);
+				System.out.println(calcul);
+			}		
+		}
+		return restaurantsProches;
+	}
+	
+	@Override
+	public Double calculDistance(int unEvent, int unResto) {
+		Evenement evt = new Evenement();
+		Restaurant resto = new Restaurant();
+		for (Evenement e : getAllEvenement()) {
+			if (e.getId() == unEvent) {
+				evt = e;
+			}
+		}
+		for (Restaurant r : getAllRestaurant()) {
+			if (r.getId() == unResto) {
+				resto = r;
+			}
+		}
+	 		
+		int R=6378137; //Rayon de la terre en mètre
+		Double coord_1_evt = convertRad(evt.getCoord().get(0));
+		Double coord_2_evt = convertRad(evt.getCoord().get(1));
+		Double coord_1_resto = convertRad(resto.getCoord().get(0));
+		Double coord_2_resto = convertRad(resto.getCoord().get(1));
+		Double dlong = (coord_2_resto - coord_2_evt) / 2;
+		Double dlat = (coord_1_resto - coord_1_evt) / 2;
+		
+		Double res = (Math.sin(dlat) * Math.sin(dlat)) + Math.cos(coord_1_evt) * Math.cos(coord_1_resto) * (Math.sin(dlong) * Math.sin(dlong));
+		Double res2 = 2 * Math.atan2(Math.sqrt(res), Math.sqrt(1 - res));
+		Double calcul = R * res2;
+		return calcul;
+	}
+	
+	public Double convertRad(double input){
+        return (Math.PI * input)/180;
 	}
 	
 	private List<Restaurant> buildRest(List<RecordRest> lesRests) {
@@ -82,6 +119,7 @@ public class FactoryImp implements Factory  {
 			rst.setAdresse(unRest.getFields().getAdresse2());
 			rst.setCoord(unRest.getFields().getLocalisation());
 			rst.setType(unRest.getFields().getCategorie());
+			rst.setVille(unRest.getFields().getCommune());
 			res.add(rst);
 			id++;
 		}

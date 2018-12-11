@@ -16,7 +16,8 @@ import fr.univ.nantes.iut.Restaurant;
 public interface Factory {
 	List<Evenement> getAllEvenement();
 	List<Restaurant> getAllRestaurant();
-	List<Restaurant> getDistance(Evenement unEvt);
+	List<Restaurant> getDistance(int unEvt);
+	Double calculDistance(int unEvent, int unResto);
 
 
 }
