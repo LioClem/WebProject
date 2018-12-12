@@ -38,6 +38,26 @@ public class FactoryImp implements Factory  {
 	}
 	
 	@Override
+	public Evenement getUnEvt(int evt) {
+		for (Evenement e : getAllEvenement()) {
+			if (e.getId() == evt) {
+				return e;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public Restaurant getUnResto(int resto) {
+		for (Restaurant r : getAllRestaurant()) {
+			if (r.getId() == resto) {
+				return r;
+			}
+		}
+		return null;
+	}
+	
+	@Override
 	public List<Restaurant> getDistance(int unEvent) {
 		List<Restaurant> recup = getAllRestaurant();
 		Evenement evt = new Evenement();

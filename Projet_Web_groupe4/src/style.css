@@ -1,0 +1,188 @@
+.titleSite {
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid;
+    border-radius: 5px;  
+    color: #1E90FF;
+}
+
+.navbar {
+    margin: 0% 10% 0% 10%;
+}
+
+.ajoutSoiree {
+    margin: 2% 10% 0% 10%;
+}
+.input {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+h1 {
+    text-decoration: underline;
+    font-weight: bold;
+}
+.button-valider {
+    margin-left: 0%;
+    margin : 5px;
+    padding : 5px;
+    background-color: #1E90FF;
+    color: white;
+    border: solid 1px #1E90FF;
+    border-radius: 5px;
+
+}
+.evt {
+    margin: 2% 10% 0% 10%;
+}
+
+.form-evt-rest {
+    margin: 2% 5% 2% 5%;
+    border: 2px solid #1E90FF;
+    border-radius: 5px;
+    padding: 5px;
+    padding-top: 2%;
+}
+
+.titleh2 {
+    color:#1E90FF;
+    font-weight: bold;
+    text-decoration: underline; 
+}
+
+.distance {
+    font-weight: bold;
+    color: red;
+}
+
+.desc {
+    margin: 5px;
+}
+
+/* Design inspiration:  https://dribbble.com/shots/1978243-Latest-News */
+body, html {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .card {
+    background-color: #341cac;
+    width: 150px;
+    display: block;
+    margin: 60px auto;
+    box-shadow: 10px 5px 40px 20px #2d1896;
+    transition: .25s;
+    border-radius: 10px;
+  }
+  .card:hover {
+    background-color: #341cac;
+    box-shadow: 10px 5px 40px 20px #271580;
+    cursor: pointer;
+  }
+  .card:hover .button-primary {
+    transform: translate(10px, 0);
+  }
+  
+  .card-header {
+  
+    background-color: #fff;
+    height: 50px;
+    width: 50%;
+    padding: 7px;
+    width: 100%;
+    background-size: cover;
+    color: #000;
+    border-radius: 10px;
+    border-top: 3px solid #000;
+      border-bottom: 3px solid #000;
+  }
+  
+  .card-header--title {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  
+  .card-body {
+    text-align: center;
+    padding: 15px;
+    background-color: #fff;
+    width: 100%;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    border-color: #341cac;
+    border-width: 10px;
+    border-left: 3px solid #000;
+      border-bottom: 3px solid #000;
+    border-right: 3px solid #000;
+  }
+  .heureDeb {
+    font-size: 20px;
+    font-weight: 600;
+    color: grey;
+  }
+  
+  .heureFin {
+    font-size: 20px;
+    font-weight: 600;
+    color: grey;
+  }
+  .numEvt {
+    font-size: 20px;
+    font-weight: 600;
+    color: grey;
+  }
+  .numResto {
+    font-size: 20px;
+    font-weight: 600;
+    color: grey;
+  }
+  .date {
+    font-size: 20px;
+    font-weight: 600;
+    color: grey;
+  }
+  .distance {
+    font-size: 20px;
+    font-weight: 600;
+    color: grey;
+  }
+  
+  .body-content {
+    background-color: #fff;
+    padding-bottom: 40px;
+    font-size: 13px;
+    line-height: 1.8;
+  
+  }
+  
+  .button-primary {
+    border: none;
+    box-shadow: none;
+    font-family: inherit;
+    background-color: transparent;
+    color: #341cac;
+    font-size: 15px;
+    transition: .25s;
+  }
+  .button-primary i {
+    padding-right: 4px;
+  }
+  
+  .designer-link {
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+    display: block;
+    border-radius: 10px;
+  }
+  
+  .header {
+      border: 5px solid red;
+      border-width: 10px;
+    }
+
+    .liste {
+        margin-left: 8%;
+
+    }

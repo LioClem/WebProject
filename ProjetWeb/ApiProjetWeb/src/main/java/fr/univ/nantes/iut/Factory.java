@@ -18,6 +18,8 @@ public interface Factory {
 	List<Restaurant> getAllRestaurant();
 	List<Restaurant> getDistance(int unEvt);
 	Double calculDistance(int unEvent, int unResto);
+	Evenement getUnEvt(int evt);
+	Restaurant getUnResto(int resto);
 
 
 }

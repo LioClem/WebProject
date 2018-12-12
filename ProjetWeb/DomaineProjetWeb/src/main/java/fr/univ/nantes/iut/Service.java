@@ -7,10 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -38,6 +36,14 @@ public class Service {
 
 	public List<Restaurant> getRestaurantsProche(int unEvt) {
 		return factory.getDistance(unEvt);
+	}
+	
+	public Evenement getUnEvt(int evt) {
+		return factory.getUnEvt(evt);
+	}
+	
+	public Restaurant getUnResto(int resto) {
+		return factory.getUnResto(resto);
 	}
 
 	public void dropSoiree() {

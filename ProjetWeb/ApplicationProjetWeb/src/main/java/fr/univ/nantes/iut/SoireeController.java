@@ -40,6 +40,7 @@ public class SoireeController {
 			@RequestParam String heure_fin, @RequestParam String date, @RequestParam
 			int num_evt, @RequestParam int num_resto) {
 	    Soiree s = service.update(nom, heure_debut, date, heure_fin, num_evt, num_resto);
+	    System.out.println("***************update réalisé****************");
 	    return s.toString();
 	  }
 	
